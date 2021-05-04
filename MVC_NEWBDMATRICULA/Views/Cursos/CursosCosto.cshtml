@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MVC_NEWBDMATRICULA.Models.pa_cursos_por_costo>
+
+@{
+    ViewBag.Title = "CursosCosto";
+}
+
+<h2>CursosCosto</h2>
+
+@using (Html.BeginForm())
+{
+<p>
+    Nombre: <input type="text" name="nombre"
+                   value="@ViewBag.NOMBRE"/>
+    <br />
+    Edad: <input type="number" name="edad"
+                 value="@ViewBag.EDAD"/>
+    <br />
+    Costo del Curso >= <input type="number"
+                              name="ncosto"
+                              value="@ViewBag.COSTO"
+                              class="form-control" />
+    <br />
+    <input type="submit"
+           value="Consultar"
+           class="btn btn-success" />
+</p>
+}
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CODCUR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMCUR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COSTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NROVAC)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODCUR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMCUR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COSTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NROVAC)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

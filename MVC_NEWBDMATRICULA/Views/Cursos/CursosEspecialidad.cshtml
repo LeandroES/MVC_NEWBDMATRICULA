@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MVC_NEWBDMATRICULA.Models.pa_cursos_especialidad>
+
+@{
+    ViewBag.Title = "CursosEspecialidad";
+    // Forma 1
+    int xconta = 0;
+    decimal xsumacosto = 0.0M;
+    int xsumavac = 0;
+    // Forma 2
+    var xconta2 = Model.Count();
+    var xsumacosto2 = Model.Sum(x => x.COSTO);
+    var xsumavac2 = Model.Sum(x=>x.NROVAC);
+}
+
+<h2>CursosEspecialidad</h2>
+
+<!-- formulario de MVC -->
+<!-- <form></form> -->
+@using (Html.BeginForm())
+{
+    <p>
+        Seleccione una Carrera: 
+        @Html.DropDownList("xcarrera", (SelectList)ViewBag.CARRERAS)
+        <br />
+        Seleccione una Especialidad:
+        @Html.DropDownList("codigo", (SelectList)ViewBag.ESPECIALIDADES,
+                           new { @class="form-control"} )
+        <br />
+        <input type="submit" value="Consultar" class="btn btn-primary" />
+    </p>
+}
+
+<p>
+   @Html.ActionLink("Create New", "Create")
+</p>
+<br />
+<p>
+    Cantidad de Cursos: @xconta2
+    <br/>
+    Total Costo: @xsumacosto2
+    <br/>
+    Total Vacantes: @xsumavac2
+</p>
+<br/>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CODCUR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMCUR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COSTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NROVAC)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        // establecer los valores de las variables
+        xconta++;
+        xsumacosto += item.COSTO;
+        xsumavac = xsumavac + item.NROVAC;
+        //
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CODCUR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMCUR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COSTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NROVAC)
+            </td>
+        </tr>
+    }
+<tr>
+    <td colspan="2">Cant. de Cursos: @xconta</td>
+    <td>Total Costo: @xsumacosto</td>
+    <td>Total Vacantes: @xsumavac</td>
+</tr>
+</table>
