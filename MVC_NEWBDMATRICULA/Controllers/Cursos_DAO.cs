@@ -62,7 +62,6 @@ namespace MVC_NEWBDMATRICULA.Controllers
             return lista;
         }
 
-
         public List<pa_cursos_por_costo> CursosPorCosto(decimal costo)
         {
             List<pa_cursos_por_costo> lista = new List<pa_cursos_por_costo>();
@@ -107,7 +106,72 @@ namespace MVC_NEWBDMATRICULA.Controllers
             return lista;
         }
 
+        //CRUD
+        public string RegistrarCurso(Cursos objCur)
+        {
 
+            string mensaje = "";
+            SqlConnection cnx = new SqlConnection(CAD_CN);
+            cnx.Open();
+
+            try
+            {
+                SqlCommand command = new SqlCommand("PA_GRABAR_MODIFICAR_CURSO", cnx);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add("@CODCUR", SqlDbType.Char, 5).Value = objCur.CODCUR;
+                command.Parameters.Add("@CODESP", SqlDbType.Char, 3).Value = objCur.CODESP;
+                command.Parameters.Add("@NOMCUR", SqlDbType.VarChar, 45).Value = objCur.CODCUR;
+                command.Parameters.Add("@COSTO", SqlDbType.Decimal).Value = objCur.CODCUR;
+                command.Parameters.Add("@NROVAC", SqlDbType.Int).Value = objCur.CODCUR;
+
+                command.ExecuteNonQuery();
+                //command.ExecuteScalar();
+
+                mensaje = "El curso fue creado y/o modificado correctamente";
+
+                cnx.Close();
+            }
+            catch (Exception)
+            {
+
+                mensaje = "Error al crear y/o modificar un curso";
+            }
+
+            return mensaje;
+
+        }
+
+        public string EliminarCurso(string codCur)
+        {
+
+            string mensaje = "";
+            SqlConnection cnx = new SqlConnection(CAD_CN);
+            cnx.Open();
+
+            try
+            {
+                SqlCommand command = new SqlCommand("PA_ELIMINAR_MODIFICAR_CURSO", cnx);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add("@CODCUR", SqlDbType.Char, 5).Value = codCur;
+                
+                command.ExecuteNonQuery();
+                //command.ExecuteScalar();
+
+                mensaje = "El curso fue eliminado correctamente";
+
+                cnx.Close();
+            }
+            catch (Exception)
+            {
+
+                mensaje = "Error al eliminar el curso";
+            }
+
+            return mensaje;
+
+        }
 
     }
 }

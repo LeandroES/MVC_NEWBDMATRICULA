@@ -134,6 +134,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Cursos\CursosEspecialidad.cshtml" />
     <Content Include="Views\Cursos\CursosCosto.cshtml" />
+    <Content Include="Views\Cursos\GrabarCurso.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

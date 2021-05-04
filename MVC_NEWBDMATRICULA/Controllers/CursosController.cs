@@ -50,5 +50,27 @@ namespace MVC_NEWBDMATRICULA.Controllers
 
             return View(listado);
         }
+
+        public ActionResult GrabarCurso()
+        {
+
+            Cursos obj = new Cursos();
+            return View(obj);
+
+        }
+        [HttpPost]
+        public ActionResult GrabarCurso(Cursos obj)
+        {
+
+            if(ModelState.IsValid == true)
+            {
+
+                ViewBag.MENSAJE = cur_dao.RegistrarCurso(obj);
+
+            }
+            return View();
+
+        }
+
     }
 }
